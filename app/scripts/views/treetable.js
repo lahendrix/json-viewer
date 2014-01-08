@@ -23,11 +23,11 @@ define([
       buildAllRowsCollection: function () {
         var self = this,
           len = this.collection.length,
-          i, isModel, row;
+          i;
 
-      for(i = 0; i < len; i++){
-        this.traverse(this.collection.at(i), null);
-      }
+        for(i = 0; i < len; i++){
+          this.traverse(this.collection.at(i), null);
+        }
     },
 
       traverse: function (row, parentId) {
@@ -35,11 +35,14 @@ define([
         var self = this,
           j, children, len, isModel;
 
-        isModel = row instanceof Backbone.Model;
-        if(!isModel) {
-          row = new Backbone.Model(row);
-        }
+        // isModel = row instanceof Backbone.Model;
+        // if(!isModel) {
+        //   row = new Backbone.Model(row);
+        // }
 
+        if(parentId) {
+          row.set('parent', parentId);
+        }
         children = row.get('children') || [];
         len = children.length;
         self.allRows.add(row);
@@ -81,7 +84,8 @@ define([
         var self = this;
             this.$el.treetable({
               expandable: true,
-              clickableNodeNames: true
+              clickableNodeNames: true,
+              expanderTemplate: '<span class="glyphicon-play"></span>'
             });
       }
 
