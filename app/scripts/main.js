@@ -30,9 +30,9 @@ require([
     'backbone',
     'routes/home'
 ], function (Backbone, Router) {
-    $(function() {
-        var router = new Router();
-        router.navigate('home', {trigger: true});
-        Backbone.history.start();
-    });
+    
+    var router = new Router();
+    router.navigate('home', {trigger: true});
+    Backbone.history.start();
+    
 });

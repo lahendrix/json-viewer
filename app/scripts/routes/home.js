@@ -15,7 +15,7 @@ define([
         showHomeView: function () {
             var homeView = new HomeView();
             homeView.render();
-            $('.container').append(homeView.$el);
+            $('#main').html(homeView.$el);
 
         },
 
