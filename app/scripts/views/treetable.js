@@ -14,7 +14,7 @@ define([
       tagName: 'table',
 
       className: 'table-hover',
-      
+
       initialize: function () {
         this.allRows = new Backbone.Collection();
         this.rowViews = {}; 
@@ -77,7 +77,13 @@ define([
       convertToTreeTable: function () {
         this.$el.treetable({
           expandable: true,
-          clickableNodeNames: true
+          expanderTemplate: '<span class="ui-icon ui-icon-triangle-1-e"></span>',
+          onNodeExpand: function (node) {
+            this.expander.removeClass('ui-icon-triangle-1-e').addClass('ui-icon-triangle-1-s');
+          },
+          onNodeCollapse: function (node) {
+            this.expander.removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
+          }
         });
       }
 

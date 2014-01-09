@@ -13,14 +13,16 @@ require.config({
             ],
             exports: 'Backbone'
         },
-        bootstrap: {
-            deps: ['jquery'],
-            exports: 'jquery'
-        },
         'jquery-treetable': {
             deps: ['jquery'],
             exports: 'jquery-treetable'
         },
+
+        'jquery-ui': {
+            deps: ['jquery'],
+            exports: 'jquery-ui'
+        },
+
         localstorage: {
             deps: ['backbone'],
             exports: 'localstorage'
@@ -31,26 +33,20 @@ require.config({
         backbone: '../bower_components/backbone/backbone',
         localstorage: "../bower_components/backbone.localStorage/backbone.localStorage",
         underscore: '../bower_components/underscore/underscore',
-        bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
-        'jquery-treetable': '../bower_components/jquery-treetable/javascripts/src/jquery.treetable'
+        'jquery-treetable': '../bower_components/jquery-treetable/javascripts/src/jquery.treetable',
+        'jquery-ui': '../bower_components/jquery-ui/ui/jquery-ui'
     }
 });
 
 require([
     'backbone',
     'routes/home',
+    'jquery-ui',
     'jquery-treetable'
 ], function (Backbone, Router) {
     
     var router = new Router();
     router.navigate('home', {trigger: true});
-    // window.SomeCollection = Backbone.Collection.extend({
-
-    //   localStorage: new Backbone.LocalStorage("SomeCollection"), // Unique name within your app.
-
-    //   // ... everything else is normal.
-
-    // });
     Backbone.history.start();
     
 });

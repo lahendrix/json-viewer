@@ -28,8 +28,8 @@ define([
 	        	children = [],
 	          	len, model, label, key;
 
-	         label = jsonObject instanceof Array? '[] ' : '{} '
-	         model = new Backbone.Model ({id: id, value: label + key});
+	         label = jsonObject instanceof Array? '[ ]' : '{ }'
+	         model = new Backbone.Model ({id: id, value: key, label: label});
 
 	        for(key in jsonObject){
 	        	id += 1;
@@ -39,7 +39,8 @@ define([
 	        	} else { // else just record the id and value of the property
 	        		children.push(new Backbone.Model({
 	        			id: id, 
-	        			value: key + ' : ' + jsonObject[key]
+	        			value: jsonObject[key],
+	        			label: key
 	        		}));
 	        	}
 	        }

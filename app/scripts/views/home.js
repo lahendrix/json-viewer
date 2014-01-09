@@ -11,7 +11,13 @@ define([
     'use strict';
 
     var HomeView = Backbone.View.extend({
+
         template: JST['app/scripts/templates/home.ejs'],
+        events: {
+          'click .sort': 'sortTree',
+          'click .expand-all': 'expandTree',
+          'click .collapse-all': 'collapseTree'
+        },
 
         render: function () {
           var data = {
@@ -28,11 +34,22 @@ define([
           model = new JsonModel(data).get('result'),
           testData = new Backbone.Collection([model]),
           treetable = new TreetableView({collection: testData});
-          window.treetable = treetable;
-
-          console.log('jsonModel', model);
-          this.$el.html(treetable.render().$el);
+          this.$el.html(this.template());
+          this.$('.treetable-container').html(treetable.render().$el);
+          this.treetableView = treetable;
           return this;
+      },
+
+      sortTree: function () {
+        alert("I promise I'll be implemented later.")
+      },
+
+      expandTree: function () {
+        this.treetableView.$el.treetable('expandAll');
+      },
+
+      collapseTree: function () {
+        this.treetableView.$el.treetable('collapseAll');
       }
     });
 
