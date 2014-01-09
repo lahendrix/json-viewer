@@ -22,22 +22,25 @@ define([
         	return {data: response};
         },
 
-        traverse: function (jsonObject, id) {
+        traverse: function (jsonObject, id, key) {
 
 	        var self = this,
 	        	children = [],
 	          	len, model, label, key;
 
-	         label = jsonObject instanceof Array? '[]': '{}'
-	         model = new Backbone.Model ({id: id, value: label});
+	         label = jsonObject instanceof Array? '[] ' : '{} '
+	         model = new Backbone.Model ({id: id, value: label + key});
 
 	        for(key in jsonObject){
 	        	id += 1;
 	        	// If property is a nested array or object, traverse it
 	        	if (typeof(jsonObject[key]) == 'object') {
-	          		children.push(this.traverse(jsonObject[key], id));
+	          		children.push(this.traverse(jsonObject[key], id, key));
 	        	} else { // else just record the id and value of the property
-	        		children.push(new Backbone.Model({id: id, value: jsonObject[key]}));
+	        		children.push(new Backbone.Model({
+	        			id: id, 
+	        			value: key + ' : ' + jsonObject[key]
+	        		}));
 	        	}
 	        }
 	        model.set('children', children);
@@ -46,7 +49,7 @@ define([
 
         parseJson: function () {
         	var result, model, key, value;
-        	result = this.traverse(this.attributes, 0);
+        	result = this.traverse(this.attributes, 0, 'json');
         	this.set('result', result);
         }
     });

@@ -13,6 +13,8 @@ define([
 
       tagName: 'table',
 
+      className: 'table-hover',
+      
       initialize: function () {
         this.allRows = new Backbone.Collection();
         this.rowViews = {}; 
@@ -21,8 +23,7 @@ define([
       },
 
       buildAllRowsCollection: function () {
-        var self = this,
-          len = this.collection.length,
+        var len = this.collection.length,
           i;
 
         for(i = 0; i < len; i++){
@@ -31,21 +32,14 @@ define([
     },
 
       traverse: function (row, parentId) {
-
-        var self = this,
-          j, children, len, isModel;
-
-        // isModel = row instanceof Backbone.Model;
-        // if(!isModel) {
-        //   row = new Backbone.Model(row);
-        // }
+        var j, children, len;
 
         if(parentId) {
           row.set('parent', parentId);
         }
         children = row.get('children') || [];
         len = children.length;
-        self.allRows.add(row);
+        this.allRows.add(row);
 
         for(j = 0; j < len; j++){
           this.traverse(children[j], row.get('id'));
@@ -81,12 +75,10 @@ define([
       },
 
       convertToTreeTable: function () {
-        var self = this;
-            this.$el.treetable({
-              expandable: true,
-              clickableNodeNames: true,
-              expanderTemplate: '<span class="glyphicon-play"></span>'
-            });
+        this.$el.treetable({
+          expandable: true,
+          clickableNodeNames: true
+        });
       }
 
     });

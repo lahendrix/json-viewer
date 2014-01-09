@@ -10,9 +10,10 @@ define([
     var RowView = Backbone.View.extend({
       tagName: 'tr',
 
-      template: _.template("<td><%=value%></td>"),
-
+      template: _.template('<td><%=value%></td>'),
       events: {
+        'dbclick td': 'rowDoubleClicked',
+        'click': 'rowClicked'
       },
 
       initialize: function () {
@@ -52,8 +53,17 @@ define([
       },
       hasChildren: function () {
         return true; // TODO: implement
-      }
+      },
 
+      rowDoubleClicked: function () {
+        console.log('clicked');
+      },
+
+      rowClicked: function () {
+        this.treetableParent.$el.children('tr').removeClass('active');
+        this.$el.addClass('active');
+        console.log('rowClicked');
+      }
       
 
     });

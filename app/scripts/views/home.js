@@ -21,7 +21,7 @@ define([
               },
               key3: ['hello', {
                   arrayObject: '1',
-                  nestedArray: ['one', 'two', 'three', 'four', {nestedArray: {nestedObject2: {hello: 1}}}]
+                  nestedArray: ['one', {a: 'a', b: 'b', c: 'c', d: 'd'}, 'two', 'three', 'four', {nestedArray: {nestedObject2: {hello: 1}}}]
               }]
           },
 
